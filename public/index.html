@@ -2,27 +2,64 @@
 <html>
 <head>
     <title>Imageboard</title>
-    <link href="https://fonts.googleapis.com/css?family=Yantramanav:300" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Yantramanav:100,700" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+    <div class="page">
+        <!-- <div class="nav">
+          <div class="nav-item">
+              <a href="/"> <i class="fas fa-home"></i> Home</a>
+          </div>
+        </div> -->
 
-    <div class="title">Imageboard</div>
-    <div class="subtitle">A simple board for collecting all of your favorite images</div> 
 
-    </div>
+          <div class="title"><span>Image</span>board</div>
+          
 
-    <div id="main" v-if ="images.length > 0">
-        <div class="image-container" id="sub-main" v-for ="image in images">
-            <div class="image-container-inlet">
-                <img class="image" :src="image.url" alt="">
+
+        <div class="content">
+          <div id="main">
+
+
+
+        <div class="wrapper-upload">
+            <div class="error-message"> {{ error }} </div>
+            <div class="upload-section">
+                  <label id="upload-label" class="upload" for="file-field"><i class="fas fa-file-upload"></i>Click here to select an image</label>
+                  <div id="upload-name"  class="input-title upload"></div>
+                  <input type="file" id="file-field" @change="imageSelected">
+                  <input id="upload-input" name="displayImage" :value="selectedImage" disabled>
+                  <div id="title-name" class="input-title upload"></div>
+                  <input id="title-input" type="text" placeholder="Title*" v-model="title" required>
+                  <div id="description-name" class="input-title upload"></div>
+                  <input id="description-input"  placeholder="Description*" type="text" v-model="description" placeholder="" required>
+                  <div id="username-name" class="input-title upload"></div>
+                  <input id="username-input" type="text" placeholder="Username*" v-model="username" placeholder="" required>
+                  <button id="submit" class="button upload" @click="upload()">Upload</button>
             </div>
-            <div class="image-description">{{ image.title }}</div>
         </div>
-     </div>
 
-    <script src="/js/vue.js"></script>
-    <script src="/js/axios.min.js"></script>
-    <script src="/js/script.js"></script>
-</body>
-</html>
+
+          <div v-if="images.length>0">
+            <div class="images-section">
+                <div v-for="image in images">
+                    <div class="card">
+                      <img class="card-image" :src="image.url" :key="image.id" :alt="image.title">
+                      <div class="card-title"> {{ image.title }} </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+        <script src="/js/vue.js"></script>
+        <script src="/js/axios.min.js"></script>
+        <script src="/js/script.js"></script>
+    </body>
+    </html>
