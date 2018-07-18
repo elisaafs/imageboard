@@ -1,36 +1,35 @@
 html {
-    font-family: "Yantramanav";
+    font-family: "Dawning of a New Day", cursive;
 }
 
 body {
     display: grid;
-    grid-template-columns: 1fr minmax(320px, 1800px) 1fr;
+
+    margin: 0;
 }
 
 * {
     box-sizing: border-box;
 }
 
-.page {
-    box-shadow: 0px 10px 20px 0px #343539;
-    grid-column: 2 / 3;
-    border: 80px solid #343539;
-    background-color: white;
+#main {
+    background-image: url("/fundo1.png") !important;
+    background-position: center;
+    background-repeat: repeat;
+    position: absolute;
+    border: 45px inset #964b00;
 }
 
-.title {
-    padding: 60px 0px 40px 0px;
-    font-size: 50px;
-    letter-spacing: 10px;
-    color: #343539;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: 100;
-    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+.margem {
+    border: 15px solid #f5f5dc;
 }
 
-span {
-    font-weight: 700;
+.last-margin {
+    border: 10px solid #c3b091;
+}
+
+.conteudo {
+    border: 28px inset #cc7722;
 }
 
 .content {
@@ -40,49 +39,40 @@ span {
 }
 
 .upload-section {
+    width: 680px;
+    height: 360px;
+    background-image: url(/folha2.png);
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.inputs-buttons {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+    justify-content: space-between;
 }
 
 #upload-name {
     width: 50%;
     justify-self: center;
     align-self: center;
-    text-transform: uppercase;
 }
 
-#upload-label,
-#upload-input {
+#upload-label {
     justify-self: center;
     align-self: center;
 }
 
-#upload-input {
-    background-color: #fbfbfb;
-    font-family: "Yantramanav";
-}
-
 #upload-label {
     cursor: pointer;
-    font-size: 16px;
+    font-size: 13px;
     border: none;
-    background-color: #484848;
-    color: white;
-    padding: 0.8em 1.6em;
-    margin-bottom: 15px;
     text-align: center;
     align-self: center;
+    font-family: "Oswald", sans-serif;
+    color: red !important;
     text-transform: uppercase;
 }
 
-#upload-label:hover {
-    transform: scale(1.05);
-}
 #file-field {
     display: none;
 }
@@ -91,13 +81,46 @@ span {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
+
 .card {
-    padding: 10px 10px 0 10px;
-    border: #484848 solid 1px;
-    margin: 30px;
+    padding: 15px 15px 45px 15px;
+    border: white solid 1px;
+    margin-bottom: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 15px;
+
     background-color: white;
+    box-shadow: 0px 10px 20px 0px #343539;
+    position: relative;
 }
 
+.pino {
+    position: absolute;
+    width: 60px;
+    top: -48px;
+    right: calc(50% - 30px);
+}
+
+.pinos {
+    width: 60px;
+}
+
+.title {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.folha {
+    width: 600px;
+    margin-top: 40px;
+}
+.text-title {
+    color: #4844cf;
+    font-size: 65px;
+    text-align: center;
+    transform: translateY(43px);
+}
 .card-image {
     width: 100%;
     height: 250px;
@@ -105,41 +128,32 @@ span {
 }
 
 .card-title {
-    margin: 10px;
+    font-size: 25px;
+    margin-top: 10px;
+    line-height: 0.5;
+    text-align: center;
+    color: #4844cf;
 }
 
 input {
-    width: 100%;
+    width: 300px;
     font-size: 16px;
     margin: 4px 0 16px 0px;
-    border: 1px solid #484848;
+    border: none;
     height: 30px;
     padding: 5px;
+    background-color: transparent;
     justify-self: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-input:invalid {
-    background-color: white;
-}
-
-input:valid {
-    background-color: white;
-}
 .error-message {
     color: red;
     font-size: 18px;
     margin-bottom: 12px;
-}
-
-.subtitle {
-    padding-bottom: 40px;
-    letter-spacing: 1px;
-    color: #484848;
-    font-size: 14px;
-    text-align: center;
+    display: none;
 }
 
 #title-input {
@@ -163,13 +177,130 @@ input:valid {
 }
 
 #description-input,
-#username-input {
-    font-family: "Yantramanav";
+#username-input,
+#title-input {
     color: #343539;
+    border-bottom: 1px solid #4844cf;
 }
 
 .wrapper-upload {
     width: 100%;
     padding: 25px 0 25px 0;
-    background-color: #fbfbfb;
+    background-image: url("/fundo.png");
+}
+
+.paper {
+    background-image: url("/folha.png");
+    width: 650px;
+    height: 340px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    transform: rotate(-4deg);
+}
+
+#pino-vermelho {
+    transform: translate(530px, -77px);
+}
+
+#pino-amarelo {
+    transform: translate(-5px, 45px);
+}
+
+/* .inputs-buttons {
+    background-image: url(/folha2.png);
+    width: 600px;
+    padding: 22px;
+} */
+
+#username-name,
+#upload-name,
+#description-name,
+#title-name,
+#upload-label {
+    display: inline;
+    font-size: 30px;
+    color: #4844cf;
+}
+
+.ticket {
+    width: 350px;
+}
+.tickets {
+    margin-left: 30px;
+}
+
+.title-tag {
+    transform: translateX(37px);
+}
+
+.description-tag {
+    transform: translateX(20px);
+}
+
+.username-tag {
+    transform: translateX(23px);
+}
+
+#upload-label {
+    background-image: url(/select.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 240px;
+    height: 125px;
+    display: inline-block;
+    line-height: 125px;
+    font-size: 21px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    transform: rotate(-2deg);
+}
+
+#upload-input {
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.upload-input2 {
+    line-height: 0;
+}
+
+#image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: zoom-out;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#image-modal-inlet {
+    top: 20px;
+    left: 50px;
+    bottom: 20px;
+    right: 50px;
+    position: absolute;
+    background-color: rgb(201, 102, 0);
+    text-align: center;
+    color: white;
+    font-family: sans-serif;
+    padding-top: 30px;
+    cursor: initial;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.image-modal-img {
+    max-width: 500px;
+}
+
+.image-modal-comment {
+    text-align: left;
+    background-color: #555;
+    border-radius: 5px;
+    margin: 10px;
 }

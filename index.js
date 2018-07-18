@@ -40,6 +40,34 @@ app.get("/images", (req, res) => {
         .catch(err => console.log(err));
 });
 
+app.get("/image/:imageId", (req, res) => {
+    db.getImageDetails(req.params.imageId)
+        .then(imageDetails => {
+            res.json(imageDetails);
+        })
+        .catch(err => console.log(err));
+});
+
+app.get("/comments/:imageId", (req, res) => {
+    db.getCommentsByImageId(req.params.imageId)
+        .then(comments => {
+            res.json(comments);
+        })
+        .catch(err => console.log(err));
+});
+
+app.post("/comment", (req, res) => {
+    console.log(req.body);
+    db.addComment(req.body.imageId, req.body.username, req.body.comment)
+        .then(result => {
+            res.json({
+                success: true,
+                comment: result
+            });
+        })
+        .catch(err => console.log(err));
+});
+
 app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
     console.log("req body is", req.body, "req file is", req.file);
     db.addImage(
