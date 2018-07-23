@@ -31,19 +31,39 @@ app.use(express.static("./public"));
 
 app.get("/images", (req, res) => {
     console.log("get working");
-    db.getImages()
+    const limit = req.query.limit;
+    const offset = req.query.offset;
+    db.getImages(limit, offset)
         .then(images => {
             console.log("db working");
-            console.log(images);
             res.json(images);
         })
         .catch(err => console.log(err));
 });
 
 app.get("/image/:imageId", (req, res) => {
-    db.getImageDetails(req.params.imageId)
-        .then(imageDetails => {
-            res.json(imageDetails);
+    Promise.all([
+        db.getImageDetails(req.params.imageId),
+        db.getTagsByImageId(req.params.imageId)
+    ])
+        .then(results => {
+            res.json({
+                imageDetails: results[0],
+                tags: results[1]
+            });
+        })
+        .catch(err => console.log(err));
+});
+
+app.get("/images/tag/:tag", (req, res) => {
+    console.log("get working");
+    const limit = req.query.limit;
+    const offset = req.query.offset;
+    db.getImagesByTag(req.params.tag, limit, offset)
+        .then(images => {
+            console.log("db working");
+            console.log(images);
+            res.json(images);
         })
         .catch(err => console.log(err));
 });
@@ -76,9 +96,15 @@ app.post("/upload", uploader.single("file"), s3.upload, function(req, res) {
         req.body.username,
         config.s3Url + req.file.filename
     ).then(result => {
-        res.json({
-            success: true,
-            image: result
+        const tags = req.body.tags ? req.body.tags.split(",") : [];
+        const tagPromises = tags.map(tag =>
+            db.addTag(result.id, tag.trim().toLowerCase())
+        );
+        Promise.all(tagPromises).then(() => {
+            res.json({
+                success: true,
+                image: result
+            });
         });
     });
 });

@@ -16,7 +16,7 @@ body {
     background-image: url("/fundo1.png") !important;
     background-position: center;
     background-repeat: repeat;
-    position: absolute;
+    position: relative;
     border: 45px inset #964b00;
 }
 
@@ -32,18 +32,13 @@ body {
     border: 28px inset #cc7722;
 }
 
-.content {
-    text-align: center;
-    background: white;
-    min-height: 98vh;
-}
-
 .upload-section {
     width: 680px;
     height: 360px;
     background-image: url(/folha2.png);
     margin-right: 30px;
     margin-bottom: 30px;
+    position: relative;
 }
 
 .inputs-buttons {
@@ -58,19 +53,26 @@ body {
 }
 
 #upload-label {
-    justify-self: center;
-    align-self: center;
-}
-
-#upload-label {
     cursor: pointer;
-    font-size: 13px;
     border: none;
     text-align: center;
     align-self: center;
     font-family: "Oswald", sans-serif;
-    color: red !important;
+    color: red;
     text-transform: uppercase;
+
+    background-image: url(/select.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 240px;
+    height: 125px;
+    display: inline-block;
+    line-height: 125px;
+    font-size: 21px;
+    margin-bottom: 10px;
+    transform: rotate(-2deg);
+    position: relative;
 }
 
 #file-field {
@@ -78,6 +80,7 @@ body {
 }
 
 .images-section {
+    margin-bottom: 50px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
@@ -89,17 +92,32 @@ body {
     margin-left: 15px;
     margin-right: 15px;
     margin-top: 15px;
-
     background-color: white;
     box-shadow: 0px 10px 20px 0px #343539;
     position: relative;
 }
 
+.card-modal {
+    border: white solid 1px;
+    padding: 25px 25px 20px 25px;
+    background-color: white;
+    position: relative;
+    text-align: center;
+    margin-top: 40px;
+    max-width: 550px;
+    left: calc(50% - 275px);
+    box-shadow: 0px 10px 20px 0px #343539;
+}
+
+.image-description {
+    position: absolute;
+}
+
 .pino {
     position: absolute;
     width: 60px;
-    top: -48px;
     right: calc(50% - 30px);
+    transform: translateY(-63px);
 }
 
 .pinos {
@@ -125,6 +143,7 @@ body {
     width: 100%;
     height: 250px;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .card-title {
@@ -133,20 +152,29 @@ body {
     line-height: 0.5;
     text-align: center;
     color: #4844cf;
+    font-family: "Dawning of a New Day", cursive;
 }
 
 input {
     width: 300px;
     font-size: 16px;
+    font-family: "Oswald", sans-serif;
     margin: 4px 0 16px 0px;
     border: none;
     height: 30px;
     padding: 5px;
     background-color: transparent;
-    justify-self: center;
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+}
+
+.input-comment {
+    border-bottom: 1px solid #4844cf;
+    width: 300px;
+    font-size: 16px;
+    font-family: "Oswald", sans-serif;
+    background-color: transparent;
+    overflow: hidden;
+    border: none;
 }
 
 .error-message {
@@ -156,29 +184,38 @@ input {
     display: none;
 }
 
-#title-input {
-    font-family: "Yantramanav";
-    color: #343539;
-}
-
 .button {
-    padding: 0.8em 1.6em;
-    font-size: 15px;
-    background-color: #343539;
+    font-size: 25px;
+
     color: white;
     border: none;
-    font-family: "Yantramanav";
+    font-family: "Oswald", sans-serif;
     text-transform: uppercase;
-}
-
-.button:hover {
     cursor: pointer;
-    transform: scale(1.05);
+
+    width: 141px;
+    background-color: transparent;
+    height: 194px;
+    position: absolute;
+    position: relative;
+    top: 27px;
+    line-height: 125px;
+    z-index: 1000;
 }
 
-#description-input,
-#username-input,
-#title-input {
+.wrapper-button {
+    background-image: url("/upload.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 141px;
+    background-color: transparent;
+    height: 194px;
+    position: absolute;
+    top: 172px;
+    left: 469px;
+}
+
+.upload-input {
     color: #343539;
     border-bottom: 1px solid #4844cf;
 }
@@ -214,58 +251,30 @@ input {
     padding: 22px;
 } */
 
-#username-name,
-#upload-name,
-#description-name,
-#title-name,
-#upload-label {
+.input-title {
     display: inline;
     font-size: 30px;
     color: #4844cf;
 }
 
 .ticket {
-    width: 350px;
-}
-.tickets {
-    margin-left: 30px;
+    width: 380px;
+    position: relative;
+    top: 20px;
+    margin-left: 40px;
 }
 
 .title-tag {
     transform: translateX(37px);
 }
-
 .description-tag {
     transform: translateX(20px);
 }
-
 .username-tag {
     transform: translateX(23px);
 }
-
-#upload-label {
-    background-image: url(/select.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 240px;
-    height: 125px;
-    display: inline-block;
-    line-height: 125px;
-    font-size: 21px;
-    margin-top: 30px;
-    margin-bottom: 10px;
-    transform: rotate(-2deg);
-}
-
-#upload-input {
-    height: 0;
-    margin: 0;
-    padding: 0;
-}
-
-.upload-input2 {
-    line-height: 0;
+.tags-tag {
+    transform: translateX(37px);
 }
 
 #image-modal {
@@ -275,17 +284,22 @@ input {
     right: 0;
     bottom: 0;
     cursor: zoom-out;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
+
+    z-index: 1000;
 }
 
 #image-modal-inlet {
+    /* display: flex;
+    flex-direction: column; */
     top: 20px;
     left: 50px;
     bottom: 20px;
     right: 50px;
     position: absolute;
-    background-color: rgb(201, 102, 0);
+    background-image: url("/fundo1.png");
     text-align: center;
+
     color: white;
     font-family: sans-serif;
     padding-top: 30px;
@@ -295,12 +309,207 @@ input {
 }
 
 .image-modal-img {
-    max-width: 500px;
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .image-modal-comment {
     text-align: left;
-    background-color: #555;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
     border-radius: 5px;
+    font-size: 20px;
     margin: 10px;
+}
+
+#pino-amarelo-bottom {
+    left: 552px;
+    top: 121px;
+    position: absolute;
+    z-index: 1;
+}
+
+.pinos-modal {
+    position: absolute;
+}
+
+#pino-amarelo-moldal-top {
+    top: 5px;
+    left: 5px;
+}
+
+#pino-vermelho-moldal-top {
+    top: 5px;
+    right: 5px;
+}
+
+.inputc {
+    border-bottom: 1px solid #4844cf;
+}
+
+#pino-amarelo-moldal-bottom {
+    bottom: 5px;
+    right: 5px;
+}
+
+#pino-vermelho-moldal-bottom {
+    bottom: 5px;
+    left: 5px;
+}
+
+.image-modal-title {
+    font-family: "Dawning of a New Day", cursive;
+    text-align: center;
+    color: #4844cf;
+    font-size: 40px;
+}
+
+.image-modal-description {
+    font-family: "Dawning of a New Day", cursive;
+    text-align: center;
+    color: red;
+    font-size: 27px;
+}
+
+.image-modal-created {
+    font-family: "Oswald", sans-serif;
+    font-size: 17px;
+    position: relative;
+    color: green;
+
+    display: inline-block;
+}
+
+.comment-wrapper {
+    background-image: url("/folhacopy.png");
+    width: 682px;
+    height: 340px;
+    left: calc(50% - 341px);
+    position: relative;
+    margin-top: 10px;
+    transform: rotate(-4deg);
+}
+
+.comentario {
+    font-family: "Oswald", sans-serif;
+    width: 213px;
+    text-align: center;
+    left: 25px;
+    line-height: 29px;
+    text-align: center;
+    transform: translate(44px, 52px);
+}
+
+.images-section a {
+    text-decoration: none;
+}
+
+.load-more-button {
+    font-family: "Oswald", sans-serif;
+    text-align: center;
+    margin-bottom: 70px;
+    /* margin-top: 10px; */
+}
+
+.load-more-button > span {
+    background-color: orange;
+    font-size: 30px;
+    padding: 5px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 60px;
+    margin-top: 30px;
+    color: white;
+}
+
+#pino-vermelho-comentario {
+    left: 32px;
+    position: absolute;
+    bottom: 280px;
+    z-index: 1;
+}
+
+.label-comment {
+    font-size: 30px;
+    color: #4844cf;
+    font-family: "Dawning of a New Day", cursive;
+}
+
+.wrapper-comment {
+    transform: translate(-84px, -10px);
+}
+
+.wrapper-username {
+    transform: translate(-84px, -10px);
+}
+
+.wrapper-tag {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+a {
+    font-size: 18px;
+    color: #4844cf;
+    text-decoration: underline;
+    font-family: "Oswald", sans-serif;
+    position: relative;
+}
+
+.add-wrapper {
+    background-image: url("/tag1.png");
+    height: 165px;
+    width: 256px;
+    transform: translate(7px, -30px);
+}
+
+.wrapper-submit {
+    background-image: url("/submit.png");
+    height: 200px;
+    width: 355px;
+    transform: translate(380px, -10px);
+    margin-bottom: 200px;
+}
+
+.submit {
+    color: white;
+    font-size: 50px;
+    height: 70px;
+    font-weight: bold;
+    cursor: pointer;
+    transform: translateY(50px);
+}
+
+.wrapper-com {
+    transform: translateY(150px);
+    width: 800px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comment-author {
+    font-size: 14px;
+    color: red;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.comment-text {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+#pino-amarelo-comentario {
+    transform: translate(355px, 32px);
 }

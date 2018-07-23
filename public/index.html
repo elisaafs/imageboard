@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Imageboard</title>
     <link href="https://fonts.googleapis.com/css?family=Dawning+of+a+New+Day|Oswald:400,700" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
@@ -12,57 +13,49 @@
                     <div class="last-margin">
                         <!-- <img class="folha" src="/folha.png"> -->
                         <div class="paper">
-                                <div class="text-title">My Image Board</div>
-                                <img id="pino-amarelo" class="pinos" src="/pino.png">
-                                <img id="pino-vermelho" class="pinos" src="/pino2.png">
+                            <div class="text-title">My Image Board</div>
+
+                            <img id="pino-amarelo" class="pinos" src="/pino.png">
+                            <img id="pino-vermelho" class="pinos" src="/pino2.png">
                         </div>
 
-                        <div v-if="images.length>0">
-                            <div class="images-section">
-                                <div v-for="image in images">
-                                    <div class="card" @click="imageModal(image.id)">
-                                        <img class="pino" src="/pino3.png">
-                                        <img class="card-image" :src="image.url" :key="image.id" :alt="image.title">
-                                        <div class="card-title"> {{ image.title }} </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <router-view name="image-overview"></router-view>
 
                         <div class="inputs-buttons">
                             <div class="tickets">
                                 <img class="ticket" src="/ticket.png">
-                                <img id="pino-amarelo-bottom" class="pinos" src="/pino.png">
                             </div>
                             <div class="upload-section">
+                                <img id="pino-amarelo-bottom" class="pinos" src="/pino.png">
                                 <div class="error-message"> {{ error }} </div>
                                 <div class="upload-tag">
                                     <label id="upload-label" class="upload" for="file-field"></i>Select an image</label>
-                                    <div id="upload-name"  class="input-title upload"></div>
+                                    <div id="upload-name"  class="input-title"></div>
                                     <input type="file" id="file-field" @change="imageSelected">
                                 </div>
-                                <div class="upload-input2">
-                                    <input id="upload-input" name="displayImage" :value="selectedImage" disabled>
+                                <div class="upload-tag title-tag">
+                                    <div id="title-name" class="input-title">Title :</div>
+                                    <input class="upload-input" type="text"  v-model="title" required>
                                 </div>
-                                <div class="title-tag">
-                                    <div id="title-name" class="input-title upload">Title :</div>
-                                    <input id="title-input" type="text"  v-model="title" required>
+                                <div class="upload-tag description-tag">
+                                    <div id="description-name" class="input-title">Description :</div>
+                                    <input class="upload-input"   type="text" v-model="description" placeholder="" required>
                                 </div>
-                                <div class="description-tag">
-                                    <div id="description-name" class="input-title upload">Description :</div>
-                                    <input id="description-input"   type="text" v-model="description" placeholder="" required>
+                                <div class="upload-tag username-tag">
+                                    <div id="username-name" class="input-title">Username :</div>
+                                    <input class="upload-input" type="text" v-model="username" placeholder="" required>
                                 </div>
-                                <div class="username-tag">
-                                    <div id="username-name" class="input-title upload">Username :</div>
-                                    <input id="username-input" type="text" v-model="username" placeholder="" required>
+                                <div class="upload-tag tags-tag">
+                                    <div id="tags-name" class="input-title">Tags :</div>
+                                    <input class="upload-input" type="text" v-model="tags" placeholder="" required>
                                 </div>
-                                <button id="submit" class="button upload" @click="upload()">Upload</button>
+                                <div class="wrapper-button">
+                                    <button id="submit" class="button upload" @click="upload()">Upload</button>
+                                </div>
                             </div>
                         </div>
 
-                        <div v-if="imageModalOpen">
-                            <image-modal v-bind:id="imageIdForModal" v-on:closemodal="closemodal"></image-modal>
-                        </div>
+                        <router-view name="image-details"></router-view>
                     </div>
                 </div>
             </div>
@@ -70,19 +63,51 @@
         <script id="image-modal" type="text/x-template">
             <div id="image-modal" @click="closemodal">
                 <div id="image-modal-inlet">
-                    <img class="image-modal-img" :src="imageDetails.url">
-                    <div class="image-modal-title">{{imageDetails.title}}</div>
-                    <div class="image-modal-description">{{imageDetails.description}}</div>
-                    <div class="image-modal-created">Uploaded by {{imageDetails.username}} on {{imageDetails.created_at}}</div>
-                    <h1>Add a Comment!</h1>
-                    <form v-on:submit.prevent="onSubmit">
-                        <label for="comment">Comment</label>
-                        <input v-model="newComment" name="comment" id="comment">
-                        <label for="username">Username</label>
-                        <input v-model="newUserName" name="username" id="username">
-                        <input type="Submit" value="Submit">
-                    </form>
-                    <div v-for="comment in comments">
+
+
+                    <div class="card-modal">
+                        <img class="pino pino-verde" src="/pino3.png">
+                        <img class="image-modal-img" :src="imageDetails.url">
+                        <div class="image-modal-title">{{imageDetails.title}}</div>
+                        <div class="image-modal-description">{{imageDetails.description}}</div>
+                        <!-- <span class="tags" v-for="tag in tags">
+                            <span>&nbsp;</span>
+                            <router-link v-bind:to="'/tag/' + tag.tag">{{ tag.tag }}</router-link>
+                            <span>&nbsp;</span>
+                        </span> -->
+                    </div>
+                    <div class="wrapper-tag">
+                        <span class="tags" v-for="tag in tags">
+                            <span>&nbsp;</span>
+                            <router-link v-bind:to="'/tag/' + tag.tag">{{ tag.tag }}</router-link>
+                            <span>&nbsp;</span>
+                        </span>
+                        <div class="image-modal-created">Uploaded by {{imageDetails.username}} on {{imageDetails.created_at}}</div>
+                    </div>
+                    <div class="comment-wrapper">
+                        <img id="pino-vermelho-comentario" class="pinos" src="/pino2.png">
+                        <div class="add-wrapper">
+                            <h1 class="comentario">Add a Comment!</h1>
+                        </div>
+
+                        <form class="form-comment" v-on:submit.prevent="onSubmit">
+
+                            <div class="wrapper-comment">
+                                <label class="label-comment" for="comment">Comment :</label>
+                                <input class="input-comment inputc" v-model="newComment" name="comment" id="comment">
+                            </div>
+                            <div class="wrapper-username">
+                                <label class="label-comment" for="username">Username :</label>
+                                <input class="input-comment inputc" v-model="newUserName" name="username" id="username">
+                            </div>
+                            <div class="wrapper-submit">
+                                <input class="submit" type="Submit" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="wrapper-com" v-for="comment in comments">
+                        <img id="pino-amarelo-comentario" class="pinos" src="/pino.png">
                         <div class="image-modal-comment">
                             <div class="comment-text">{{comment.comment}}</div>
                             <div class="comment-author">{{comment.username}} on {{comment.created_at}}</div>
@@ -91,7 +116,26 @@
                 </div>
             </div>
         </script>
+        <script id="images-overview" type="text/x-template">
+            <div>
+                <div class="images-section">
+                    <div v-for="image in images">
+                        <router-link v-bind:to="'/image/' + image.id">
+                            <div class="card">
+                                <img class="pino" src="/pino3.png">
+                                <img class="card-image" :src="image.url" :key="image.id" :alt="image.title">
+                                <div class="card-title"> {{ image.title }} </div>
+                            </div>
+                        </router-link>
+                    </div>
+                </div>
+                <div v-if="moreAvailable" @click="more" class="load-more-button">
+                    <span>MORE</span>
+                </div>
+            </div>
+        </script>
         <script src="/js/vue.js"></script>
+        <script src="/js/vue-router.js"></script>
         <script src="/js/axios.min.js"></script>
         <script src="/js/script.js"></script>
     </body>
